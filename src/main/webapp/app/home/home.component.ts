@@ -6,6 +6,7 @@ import { LoginModalService, Principal, Account } from 'app/core';
 import { CourseService } from 'app/shared/service/CourseService';
 import { CourseDto } from 'app/shared/model/course-dto.model';
 import { CourseWithTNDto } from 'app/shared/model/courseWithTN-dto.model';
+import { toString } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
     selector: 'jhi-home',
@@ -16,6 +17,13 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
     classeNameNeedToReg: string;
+    searchClass: string;
+    newClassName: string;
+    newLocation: string;
+    newContent: string;
+    newTeachId: number;
+    newCourse: CourseDto;
+    temp: number;
 
     constructor(
         private principal: Principal,
@@ -78,4 +86,20 @@ export class HomeComponent implements OnInit {
     clearAllCourses() {
         this.courses = [];
     }
+    clearAllCoursesWithTN() {
+        this.coursesWithTN = [];
+    }
+    deleteCourse(name: string) {
+        //delete
+        this.courseService.delete(name).subscribe();
+    }
+    // addCourse(){
+    //
+    //     this.newClassName = 'JAVA';
+    //     this.newLocation = 'CA';
+    //     this.newContent = 'easy';
+    //     this.newTeachId = 1;
+    //     this.newCourse =  new CourseDto(this.newClassName, this.newLocation, this.newContent, this.newTeachId);
+    //     this.courseService.add(this.newCourse).subscribe();
+    // }
 }

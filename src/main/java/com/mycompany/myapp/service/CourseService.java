@@ -42,9 +42,16 @@ public class CourseService {
             }
 
             return courseDtos;
+        }else{
+            courseDtos.clear();
+            List<Course> courses = courseRepository.findAll();
+            for (Course c : courses) {
+                courseDtos.add(new CourseDto(c.getCourseName(), c.getCourseLocation(), c.getCourseContent(), c.getTeacherId()));
+            }
+            return courseDtos;
         }
 
-        return courseDtos;
+
     }
 
     public List<CourseDto> findAllCoursesDtoFromDB(){
@@ -80,7 +87,7 @@ public class CourseService {
         Course courseBeingSaved = Course.builder()
             .courseName(course.getCourseName())
             .courseContent(course.getCourseContent())
-            .courseLocation(course.getCourseContent())
+            .courseLocation(course.getCourseLocation())
             .teacherId(course.getTeacherId())
             .build();
 
@@ -92,6 +99,7 @@ public class CourseService {
 
     }
 
+
     public void deleteCourse(String courseName) throws Exception{
         Optional<Course> OptionalExistingCourse = courseRepository.findCourseByCourseName(courseName);
 
@@ -100,7 +108,10 @@ public class CourseService {
         }
 
         try {
+
             courseRepository.delete(OptionalExistingCourse.get());
+
+
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
