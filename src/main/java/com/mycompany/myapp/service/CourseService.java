@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mycompany.myapp.domain.Teacher;
+import com.mycompany.myapp.domain.dto.TeacherDto;
+import com.mycompany.myapp.repository.TeacherRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +34,14 @@ public class CourseService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TeacherRepository teacherRepository;
+
     List<CourseDto> courseDtos = new ArrayList<>();
+
+    List<TeacherDto> teacherDto = new ArrayList<>();
+
+    Teacher teacher = null;
 
     public List<CourseDto> findAllCourses() {
 
@@ -77,18 +88,42 @@ public class CourseService {
         }
     }
 
-    public void addCourse(CourseDto course) throws Exception{
+
+
+//    public void addCourse(CourseDto course) throws Exception{
+//        Optional<Course> courseDto = courseRepository.findCourseByCourseName(course.getCourseName());
+//
+//        if(courseDto.isPresent()){
+//            throw new Exception("Course is existing.");
+//        }
+//
+//        Course courseBeingSaved = Course.builder()
+//            .courseName(course.getCourseName())
+//            .courseContent(course.getCourseContent())
+//            .courseLocation(course.getCourseLocation())
+//            .teacherId(course.getTeacherId())
+//            .build();
+//
+//        try {
+//            courseRepository.saveAndFlush(courseBeingSaved);
+//        } catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+//
+//    }
+
+    public void addCourse(CourseWithTNDto course) throws Exception{
         Optional<Course> courseDto = courseRepository.findCourseByCourseName(course.getCourseName());
 
         if(courseDto.isPresent()){
             throw new Exception("Course is existing.");
         }
-
+        addTeacher(course.getTeacherName());
         Course courseBeingSaved = Course.builder()
             .courseName(course.getCourseName())
             .courseContent(course.getCourseContent())
             .courseLocation(course.getCourseLocation())
-            .teacherId(course.getTeacherId())
+            .teacherId(findTeacherIdByName(course.getTeacherName()))
             .build();
 
         try {
@@ -130,6 +165,38 @@ public class CourseService {
         existingCourse.setCourseLocation(course.getCourseLocation());
         existingCourse.setCourseName(course.getCourseName());
         existingCourse.setTeacherId(course.getTeacherId());
+        //existingCourse.setTeacherId(course.getTeacherId());
 
     }
+
+    public long findTeacherIdByName(String name) throws Exception{
+        this.teacher = teacherRepository.findTeacherByTeacherName(name);
+        if(this.teacher == null){
+            throw new Exception("Teacher is not exist.");
+        }
+
+        return this.teacher.getTeacherId();
+    }
+
+    public void addTeacher(String name) throws Exception{
+        Teacher teacher = teacherRepository.findTeacherByTeacherName(name);
+
+        if(teacher != null){
+            return;
+        }
+
+        Teacher teacherBeingSaved = Teacher.builder()
+            .teacherName(name)
+            .build();
+
+        try {
+            teacherRepository.saveAndFlush(teacherBeingSaved);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+    }
+
+
+
 }

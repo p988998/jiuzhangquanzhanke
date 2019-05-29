@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
-
+import { NgForm } from '@angular/forms';
 import { LoginModalService, Principal, Account } from 'app/core';
 import { CourseService } from 'app/shared/service/CourseService';
 import { CourseDto } from 'app/shared/model/course-dto.model';
@@ -18,12 +18,6 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     classeNameNeedToReg: string;
     searchClass: string;
-    newClassName: string;
-    newLocation: string;
-    newContent: string;
-    newTeachId: number;
-    newCourse: CourseDto;
-    temp: number;
 
     constructor(
         private principal: Principal,
@@ -32,6 +26,8 @@ export class HomeComponent implements OnInit {
         private courseService: CourseService
     ) {}
 
+    newCourse: CourseDto;
+    newCourseWithTNDto: CourseWithTNDto;
     courses: CourseDto[] = [];
 
     coursesWithTN: CourseWithTNDto[] = [];
@@ -93,13 +89,24 @@ export class HomeComponent implements OnInit {
         //delete
         this.courseService.delete(name).subscribe();
     }
-    // addCourse(){
-    //
-    //     this.newClassName = 'JAVA';
-    //     this.newLocation = 'CA';
-    //     this.newContent = 'easy';
-    //     this.newTeachId = 1;
-    //     this.newCourse =  new CourseDto(this.newClassName, this.newLocation, this.newContent, this.newTeachId);
-    //     this.courseService.add(this.newCourse).subscribe();
-    // }
+    addCourse(f: NgForm) {
+        //  debugger;
+        this.newCourseWithTNDto = {
+            courseName: f.value.newClassName,
+            courseLocation: f.value.newLocation,
+            courseContent: f.value.newContent,
+            teacherName: f.value.newTeacher
+        };
+        this.courseService.add(this.newCourseWithTNDto).subscribe();
+    }
+
+    updateCourse(f: NgForm) {
+        this.newCourse = {
+            courseName: f.value.updateName,
+            courseLocation: f.value.updateLocation,
+            courseContent: f.value.updateContent,
+            courseTeacher: f.value.updateTeacher
+        };
+        this.courseService.update(this.newCourse).subscribe();
+    }
 }

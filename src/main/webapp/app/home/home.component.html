@@ -29,22 +29,22 @@
         <div><span><button (click)="getAllCourses()">显示所有课程</button> <button (click)="clearAllCourses()">清除</button></span></div>
             <div *ngFor="let course of courses" style="padding-bottom: 2px">
                 <div style="display: flex; width: 100%; height: 40px; justify-content: space-between; border-top: 1px solid; border-bottom: 1px solid; border-left: 1px solid; border-right: 1px solid">
-                    <div style="padding-left: 5px">{{course.courseName}}</div>
-                    <div>{{course.courseLocation}}</div>
-                    <div>{{course.courseContent}}</div>
-                    <div>{{course.teacherId}}</div>
-                    <div><button (click)="deleteCourse(course.courseName)">删除</button></div>
+                    <div style="padding-left: 5px; width: 20%">{{course.courseName}}</div>
+                    <div style="padding-left: 5px; width: 20%">{{course.courseLocation}}</div>
+                    <div style="padding-left: 5px; width: 20%">{{course.courseContent}}</div>
+                    <div style="padding-left: 5px; width: 20%">{{course.teacherId}}</div>
+                    <div style="padding-left: 5px; width: 20%"><button (click)="deleteCourse(course.courseName)">删除</button></div>
                  </div>
             </div>
         </div>
 
-        <div *ngIf="isAuthenticated()">
-            <hr>
-            <span>搜索课程</span>
+<!--        <div *ngIf="isAuthenticated()">-->
+<!--            <hr>-->
+<!--            <span>搜索课程</span>-->
 
-            <div class="form-group">
-                <label for="searchclass">Course Name</label>
-                <input type="text" class="form-control" id="searchclass" placeholder="Course Name" [(ngModel)]="searchClass">
+<!--            <div class="form-group">-->
+<!--                <label for="searchclass">Course Name</label>-->
+<!--                <input type="text" class="form-control" id="searchclass" placeholder="Course Name" [(ngModel)]="searchClass">-->
 <!--            <div *ngFor="let course of coursesWithTN" style="padding-bottom: 2px">-->
 <!--                <div style="display: flex; width: 100%; height: 40px; justify-content: space-between; border-top: 1px solid; border-bottom: 1px solid; border-left: 1px solid; border-right: 1px solid">-->
 <!--                    <div style="padding-left: 5px">{{course.courseName}}</div>-->
@@ -53,34 +53,56 @@
 <!--                    <div>{{course.teacherName}}</div>-->
 <!--                </div>-->
 <!--            </div>-->
-            </div>
-            <div><span><button (click)="getAllCoursesWithTN()">提交</button> <button (click)="clearAllCoursesWithTN()">清除</button></span></div>
+<!--        </div>-->
+<!--        -->
+<!--        <div><span><button (click)="getAllCoursesWithTN()">提交</button> <button (click)="clearAllCoursesWithTN()">清除</button></span></div>-->
 
         <div *ngIf="isAuthenticated()">
             <hr>
             <span>增加课程</span>
-            <form>
+            <form #f="ngForm" (ngSubmit)="addCourse(f)">
                 <div class="form-group">
                     <label for="formGroupExampleInput">Course Name</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g. JAVA" [(ngModel)]="newClassName">
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g. JAVA" name="newClassName" ngModel>
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Location</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g. Building A" [(ngModel)]="newLocation">
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g. Building A" name="newLocation" ngModel>
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput3">Content</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="e.g. easy" [(ngModel)]="newContent">
+                    <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="e.g. easy" name="newContent" ngModel>
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput4">Teacher</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="e.g. 1" [(ngModel)]="newTeachId">
+                    <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="e.g. 1" name="newTeacher" ngModel>
                 </div>
-                <button type="submit" (click)="addCourse()">提交</button>
-
-
+                <button type="submit" >提交</button>
             </form>
+        </div>
 
+        <div *ngIf="isAuthenticated()">
+            <hr>
+            <span>修改课程</span>
+            <form #f="ngForm" (ngSubmit)="updateCourse(f)">
+                <div class="form-group">
+                    <label for="updateName">Course Name</label>
+                    <input type="text" class="form-control" id="updateName" placeholder="e.g. JAVA" name="updateName" ngModel>
+                </div>
+                <div class="form-group">
+                    <label for="updateLocation">Location</label>
+                    <input type="text" class="form-control" id="updateLocation" placeholder="e.g. Building A" name="updateLocation" ngModel>
+                </div>
+                <div class="form-group">
+                    <label for="updateContent">Content</label>
+                    <input type="text" class="form-control" id="updateContent" placeholder="e.g. easy" name="updateContent" ngModel>
+                </div>
+                <div class="form-group">
+                    <label for="updateTeacher">Teacher</label>
+                    <input type="text" class="form-control" id="updateTeacher" placeholder="e.g. 1" name="updateTeacher" ngModel>
+                </div>
+                <button type="submit" >提交</button>
+            </form>
         </div>
 <!--        <div *ngIf="isAuthenticated()">-->
 <!--            <hr>-->

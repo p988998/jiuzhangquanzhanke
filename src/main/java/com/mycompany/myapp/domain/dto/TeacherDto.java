@@ -6,14 +6,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseDto {
-
-    private String courseName;
-
-    private String courseLocation;
-
-    private String courseContent;
+public class TeacherDto {
+    private String teacherName;
 
     private long teacherId;
-
 }

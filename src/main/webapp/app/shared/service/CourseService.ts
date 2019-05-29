@@ -30,7 +30,10 @@ export class CourseService {
     update(course: CourseDto): Observable<Response> {
         return this.http.put<Response>(this.courseUpdateUrl, course);
     }
-    add(course: CourseDto): Observable<Response> {
+    add(course: CourseWithTNDto): Observable<Response> {
         return this.http.post<Response>(`${this.courseAddUrl}`, course);
     }
+    // add(course: CourseWithTNDto): Observable<Response> {
+    //     return this.http.post<Response>(`${this.courseAddUrl}`, course);
+    // }
 }
