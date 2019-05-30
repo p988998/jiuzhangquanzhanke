@@ -502,9 +502,9 @@
                     <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/jiuzhangquanzhanke</url>
+                    <url>jdbc:mysql://jiuzhang-rds.c5msahonbrwu.us-west-1.rds.amazonaws.com:3306/jiuzhangquanzhanke</url>
                     <defaultSchemaName>jiuzhangquanzhanke</defaultSchemaName>
-                    <username>root</username>
+                    <username>jiuzhang</username>
                     <password>pnj900309</password>
                     <referenceUrl>hibernate:spring:com.mycompany.myapp.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                     <verbose>true</verbose>

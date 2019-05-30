@@ -21,7 +21,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @GetMapping(path = "/api/course/findAllCourses", produces = "application/json")
+    @GetMapping(path = "api/course/findAllCourses", produces = "application/json")
     public HttpEntity<List<CourseDto>> findAllCourses(){
         
         List<CourseDto> allCourses = courseService.findAllCourses();
