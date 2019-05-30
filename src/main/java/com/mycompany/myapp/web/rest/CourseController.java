@@ -21,7 +21,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @GetMapping(path = "api/course/findAllCourses", produces = "application/json")
+    @GetMapping(path = "/api/course/findAllCourses", produces = "application/json")
     public HttpEntity<List<CourseDto>> findAllCourses(){
         
         List<CourseDto> allCourses = courseService.findAllCourses();
@@ -29,14 +29,14 @@ public class CourseController {
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
     }
 
-    @GetMapping(path = "api/course/findAllCoursesDto", produces = "application/json")
+    @GetMapping(path = "/api/course/findAllCoursesDto", produces = "application/json")
     public HttpEntity<List<CourseDto>> findAllCoursesDto(){
         List<CourseDto> allCourses = courseService.findAllCoursesDtoFromDB();
 
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
     }
 
-    @GetMapping(path = "api/course/findAllCoursesWithTNDto", produces = "application/json")
+    @GetMapping(path = "/api/course/findAllCoursesWithTNDto", produces = "application/json")
     public HttpEntity<List<CourseWithTNDto>> findAllCoursesWithTNDto(){
         List<CourseWithTNDto> allCourses = courseService.findAllCoursesDtoWithTeacherNameFromDB();
 
