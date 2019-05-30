@@ -8,10 +8,10 @@ import { CourseWithTNDto } from 'app/shared/model/courseWithTN-dto.model';
 @Injectable()
 export class CourseService {
     private courseAddressUrl = SERVER_API_URL + 'api/course/findAllCoursesDto';
-    private courseAddressWithTNUrl = SERVER_API_URL + '/api/course/findAllCoursesWithTNDto';
-    private courseDeleteUrl = SERVER_API_URL + '/api/course/deleteCourse';
-    private courseUpdateUrl = SERVER_API_URL + '/api/course/updateCourse';
-    private courseAddUrl = SERVER_API_URL + '/api/course/addCourse';
+    private courseAddressWithTNUrl = SERVER_API_URL + 'api/course/findAllCoursesWithTNDto';
+    private courseDeleteUrl = SERVER_API_URL + 'api/course/deleteCourse';
+    private courseUpdateUrl = SERVER_API_URL + 'api/course/updateCourse';
+    private courseAddUrl = SERVER_API_URL + 'api/course/addCourse';
 
     constructor(private http: HttpClient) {}
 
