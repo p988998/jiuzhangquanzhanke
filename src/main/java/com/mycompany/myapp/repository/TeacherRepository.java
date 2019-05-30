@@ -20,4 +20,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
     List<TeacherDto> findAllTeachersDto();
 
     Teacher findTeacherByTeacherName(String teacherName);
+
 }

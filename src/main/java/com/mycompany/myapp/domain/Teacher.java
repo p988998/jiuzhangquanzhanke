@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false, columnDefinition = "bigint")
+    @Column( unique = true, nullable = false, columnDefinition = "bigint")
     private long teacherId;
 
     @Column(name = "teacher_name", nullable = false, length = 100, columnDefinition = "nvarchar(100)")
