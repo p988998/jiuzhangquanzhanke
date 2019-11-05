@@ -47,7 +47,6 @@ module.exports = (options) => ({
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: `'${options.env}'`,
                 BUILD_TIMESTAMP: `'${new Date().getTime()}'`,
                 VERSION: `'${utils.parseVersion()}'`,
                 DEBUG_INFO_ENABLED: options.env === 'development',
